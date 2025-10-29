@@ -87,12 +87,12 @@ Runs Prettier on all files to keep code style consistent.
 
 ## Project Status
 
-🟡 **Current:**
+**Current:**
 
 - Framework and environment successfully configured.  
 - Initial Page Object implemented (`LoginPage`) with stable locator strategy and ESLint v9 + Prettier integration validated.
 
-🟢 **Next Steps:** 
+**Next Steps:** 
 
 - Implement `LoginActions` with basic login workflow  
 - Add first Playwright test scenarios for valid and invalid login  
