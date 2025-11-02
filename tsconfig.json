@@ -14,7 +14,11 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "allowJs": false,
-    "rootDir": "."
+    "rootDir": ".",
+    "baseUrl": "src",
+    "paths": {
+      "@base": ["base.resource.ts"]
+    }
   },
   "include": ["src/**/*.ts", "playwright.config.ts"]
 }
