@@ -1,6 +1,10 @@
-import { Page } from '@playwright/test';
+/**
+ * AuthActions
+ * - Encapsulates business-level login flows using LoginPage + user data.
+ * - Used in higher-level tests (Dashboard, Time, PIM, etc.).
+ */
 
-import { LoginPage, users } from '@base';
+import { Page, expect, LoginPage, users } from '@base';
 
 export class AuthActions {
   readonly page: Page;
@@ -14,6 +18,9 @@ export class AuthActions {
   async loginAsAdmin() {
     await this.loginPage.goto();
     await this.loginPage.login(users.admin.username, users.admin.password);
+
+    await this.page.waitForURL(/dashboard/);
+    await expect(this.page).toHaveURL(/dashboard/);
   }
 
   async loginWith(username: string, password: string) {
