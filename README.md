@@ -122,26 +122,24 @@ Runs Prettier on all files to keep code style consistent.
 
 ## Project Status
 
-**Current:**
-
+**Current:**  
 - Framework and environment fully configured (Playwright + TypeScript + ESLint v9 + Prettier).  
-- `LoginPage` implemented with stable, role-based Playwright locators.  
-- `AuthActions` created for reusable login workflows.  
-- `ForgotPasswordPage` implemented with end-to-end validation of password reset flow.  
-- `login.matrix.spec.ts` added, covering:  
-  - Successful authentication  
-  - Invalid credentials validation  
-  - Required field validation for username and password  
-- TypeScript path aliases (`@base`) configured for simplified imports.  
-- Linting, formatting, and local execution verified successfully.
+- Page Action Model implemented for core modules:  
+  - `LoginPage`, `DashboardPage`, and `TimePage` with stable, role-based selectors.  
+- `AuthActions` added for reusable login and authentication flows.  
+- Comprehensive test coverage completed for:  
+  - Login outcomes matrix (valid, invalid, and required field validations).  
+  - Forgot Password end-to-end reset flow.  
+  - Dashboard layout validation and navigation to Time module.  
+  - Time module Punch In/Out operations and record management (edit/delete).  
+- TypeScript path aliases (`@base`) configured for clean imports.  
+- Linting, formatting, and local execution successfully validated.  
 
-**Next Steps:**
-
-- Add `DashboardPage` to validate main widgets and navigation menu items.  
-- Implement `TimePage` to automate Punch In/Out workflows.  
-- Integrate Allure reporting and attach artifacts on test failure.  
-- Configure GitHub Actions CI for automated headless execution.  
-- Expand Page Action Model coverage for Admin and PIM modules.
+**Next Steps:**  
+- Implement GitHub Actions CI for automated headless test runs with artifact upload (HTML report, trace, video).  
+- Integrate Allure reporting for enhanced test visualization.  
+- Add tagging strategy for test grouping (e.g., `@smoke`, `@regression`, `@dashboard`).  
+- Final documentation polish with CI setup instructions and report references.  
 
 ## Author
 

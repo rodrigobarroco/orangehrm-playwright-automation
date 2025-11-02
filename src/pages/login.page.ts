@@ -1,4 +1,10 @@
-import { Page, Locator, expect } from '@playwright/test';
+/**
+ * LoginPage
+ * - Handles UI-level interactions only (e.g. fill username/password, click login).
+ * - Used in login-specific tests (validation, error messages, required fields).
+ */
+
+import { Page, Locator, expect } from '@base';
 
 export class LoginPage {
   readonly page: Page;
