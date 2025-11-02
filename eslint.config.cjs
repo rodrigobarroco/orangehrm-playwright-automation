@@ -13,10 +13,11 @@ module.exports = [
       'allure-results/**',
       'allure-report/**',
       'playwright-report/**',
+      'test-results/**',
       'eslint.config.cjs',
       'playwright.config.ts',
-      'tsconfig.json'
-    ]
+      'tsconfig.json',
+    ],
   },
   ...compat.extends('plugin:import/recommended'),
   js.configs.recommended,
@@ -29,12 +30,19 @@ module.exports = [
       parser: tsParser,
       parserOptions: {
         project: './tsconfig.json',
-        tsconfigRootDir: __dirname
-      }
+        tsconfigRootDir: __dirname,
+      },
     },
     plugins: {
       import: importPlugin,
-      '@typescript-eslint': tsPlugin
+      '@typescript-eslint': tsPlugin,
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
@@ -42,10 +50,12 @@ module.exports = [
         'error',
         {
           alphabetize: { order: 'asc', caseInsensitive: true },
-          'newlines-between': 'always'
-        }
+          'newlines-between': 'always',
+        },
       ],
-      'no-console': ['warn', { allow: ['warn', 'error'] }]
-    }
-  }
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+
+      'import/no-unresolved': 'off',
+    },
+  },
 ];
