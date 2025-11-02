@@ -1,5 +1,6 @@
 // pages
 export { LoginPage } from './pages/login.page';
+export { ForgotPasswordPage } from './pages/forgot-password.page';
 //export { DashboardPage } from './pages/dashboard.page';
 //export { TimePage } from './pages/time.page';
 

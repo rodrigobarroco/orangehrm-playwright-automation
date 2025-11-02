@@ -14,11 +14,12 @@ This framework follows a **modular and scalable design** using Page and Action l
 ## Current Scope (v1)
 
 The first implemented test suite covers the **authentication flow**:
+
 - Added `LoginPage` with robust Playwright locators.
 - Created `AuthActions` for reusable login flows.
 - Implemented **Login Matrix Test** to validate:
-  - Successful login with valid credentials  
-  - Invalid credentials error handling  
+  - Successful login with valid credentials
+  - Invalid credentials error handling
   - Required field validations (username/password)
 
 ### Folder Structure
@@ -62,21 +63,25 @@ This command installs all dependencies and downloads Playwright browsers.
 ### Running Tests
 
 Headed mode:
+
 ```bash
 npm run test
-``` 
+```
 
 Headless mode:
+
 ```bash
 npx playwright test --headless
-``` 
+```
 
 Debug mode (opens Playwright inspector):
-```bash 
+
+```bash
 npx playwright test --debug
 ```
 
 Show report:
+
 ```bash
 npx playwright show-report
 ```
@@ -122,19 +127,21 @@ Runs Prettier on all files to keep code style consistent.
 - Framework and environment fully configured (Playwright + TypeScript + ESLint v9 + Prettier).  
 - `LoginPage` implemented with stable, role-based Playwright locators.  
 - `AuthActions` created for reusable login workflows.  
-- `login.matrix.spec.ts` added, covering:
+- `ForgotPasswordPage` implemented with end-to-end validation of password reset flow.  
+- `login.matrix.spec.ts` added, covering:  
   - Successful authentication  
   - Invalid credentials validation  
   - Required field validation for username and password  
-- All imports resolved using TypeScript aliases (`@base`), linting and formatting validated.
+- TypeScript path aliases (`@base`) configured for simplified imports.  
+- Linting, formatting, and local execution verified successfully.
 
-**Next Steps:** 
+**Next Steps:**
 
 - Add `DashboardPage` to validate main widgets and navigation menu items.  
 - Implement `TimePage` to automate Punch In/Out workflows.  
 - Integrate Allure reporting and attach artifacts on test failure.  
 - Configure GitHub Actions CI for automated headless execution.  
-- Expand Page Action Model for Admin and PIM modules.
+- Expand Page Action Model coverage for Admin and PIM modules.
 
 ## Author
 

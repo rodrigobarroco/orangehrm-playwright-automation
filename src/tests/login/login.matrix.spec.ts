@@ -1,17 +1,20 @@
 import { test, expect } from '@playwright/test';
 
-import { LoginPage } from '@base';
+import { LoginPage, users } from '@base';
 
 test.describe('Login Outcomes Matrix', () => {
   const examples = [
-    { username: 'Admin', password: 'admin123', outcome: 'Redirects to Dashboard' },
-    { username: 'Admin', password: 'wrong', outcome: 'Shows "Invalid credentials"' },
-    { username: 'wrong', password: 'admin123', outcome: 'Shows "Invalid credentials"' },
-    { username: '', password: 'admin123', outcome: 'Shows "Required" for Username' },
-    { username: 'Admin', password: '', outcome: 'Shows "Required" for Password' },
+    {
+      username: users.admin.username,
+      password: users.admin.password,
+      outcome: 'Redirects to Dashboard',
+    },
+    { username: users.admin.username, password: 'wrong', outcome: 'Shows "Invalid credentials"' },
+    { username: 'wrong', password: users.admin.password, outcome: 'Shows "Invalid credentials"' },
+    { username: '', password: users.admin.password, outcome: 'Shows "Required" for Username' },
+    { username: users.admin.username, password: '', outcome: 'Shows "Required" for Password' },
     { username: '', password: '', outcome: 'Shows "Required" for both fields' },
   ];
-
   for (const { username, password, outcome } of examples) {
     test(`${outcome} → username="${username}" / password="${password}"`, async ({ page }) => {
       const loginPage = new LoginPage(page);
