@@ -5,25 +5,32 @@ This repository contains the initial setup for a modern **UI automation framewor
 
 ## Project Overview
 
-This first version defines the **project architecture, tooling, and dependency setup**.  
-No tests or automation flows have been implemented yet.
+This framework follows a **modular and scalable design** using Page and Action layers, providing clean separation between:
 
-Future updates will include:
+- Page Objects (UI elements and actions)
+- Business Flows (Auth, Dashboard, Time)
+- Reusable Fixtures and Configurations
 
-- Page and Action layers for Login, PIM, and Admin modules
-- Reusable fixtures and data management
-- Allure reporting and CI/CD integration
+## Current Scope (v1)
+
+The first implemented test suite covers the **authentication flow**:
+- Added `LoginPage` with robust Playwright locators.
+- Created `AuthActions` for reusable login flows.
+- Implemented **Login Matrix Test** to validate:
+  - Successful login with valid credentials  
+  - Invalid credentials error handling  
+  - Required field validations (username/password)
 
 ### Folder Structure
 
 ```
 src/
-├── actions/       # Business flows (to be implemented)
-├── fixtures/      # Shared setup/teardown (to be implemented)
-├── pages/         # Page Objects (to be implemented)
-├── tests/         # Test suites (to be implemented)
-├── utils/         # Helpers, data, and configuration
-└── config/        # Constants and environment settings
+├── actions/ # Business logic (e.g., Auth, Time)
+├── config/ # Constants and environment settings
+├── fixtures/ # Shared setup/teardown (future use)
+├── pages/ # Page Objects (Login, Dashboard, etc.)
+├── tests/ # Test suites (feature-based)
+└── utils/ # Helpers, data, and configuration
 ```
 
 ## Tech Stack
@@ -33,15 +40,16 @@ src/
 - [Allure Reporter](https://docs.qameta.io/allure/)
 - ESLint + Prettier for code quality
 - Node.js 20+
+- GitHub Actions CI (to be added)
 
-## Installation & Setup
+## Setup & Run
 
 ### Prerequisites
 
 - Node.js 20+
 - Git
 
-### Initial Setup
+### Installation
 
 Clone the repository and run:
 
@@ -50,6 +58,28 @@ npm run setup
 ```
 
 This command installs all dependencies and downloads Playwright browsers.
+
+### Running Tests
+
+Headed mode:
+```bash
+npm run test
+``` 
+
+Headless mode:
+```bash
+npx playwright test --headless
+``` 
+
+Debug mode (opens Playwright inspector):
+```bash 
+npx playwright test --debug
+```
+
+Show report:
+```bash
+npx playwright show-report
+```
 
 ## Code Quality and Formatting
 
@@ -89,18 +119,25 @@ Runs Prettier on all files to keep code style consistent.
 
 **Current:**
 
-- Framework and environment successfully configured.  
-- Initial Page Object implemented (`LoginPage`) with stable locator strategy and ESLint v9 + Prettier integration validated.
+- Framework and environment fully configured (Playwright + TypeScript + ESLint v9 + Prettier).  
+- `LoginPage` implemented with stable, role-based Playwright locators.  
+- `AuthActions` created for reusable login workflows.  
+- `login.matrix.spec.ts` added, covering:
+  - Successful authentication  
+  - Invalid credentials validation  
+  - Required field validation for username and password  
+- All imports resolved using TypeScript aliases (`@base`), linting and formatting validated.
 
 **Next Steps:** 
 
-- Implement `LoginActions` with basic login workflow  
-- Add first Playwright test scenarios for valid and invalid login  
-- Configure `playwright.config.ts` (browser matrix, retries, reports)  
-- Expand Page Objects for PIM and Admin modules
+- Add `DashboardPage` to validate main widgets and navigation menu items.  
+- Implement `TimePage` to automate Punch In/Out workflows.  
+- Integrate Allure reporting and attach artifacts on test failure.  
+- Configure GitHub Actions CI for automated headless execution.  
+- Expand Page Action Model for Admin and PIM modules.
 
 ## Author
 
 **Rodrigo Barroco**
 Quality Automation Engineer
-Project: Optii QA Automation Challenge
+Project: OrangeHRM QA Automation Challenge

@@ -17,7 +17,11 @@
     "rootDir": ".",
     "baseUrl": "src",
     "paths": {
-      "@base": ["base.resource.ts"]
+      "@base": ["base.resource.ts"],
+      "@pages/*": ["pages/*"],
+      "@actions/*": ["actions/*"],
+      "@config/*": ["config/*"],
+      "@tests/*": ["tests/*"]
     }
   },
   "include": ["src/**/*.ts", "playwright.config.ts"]

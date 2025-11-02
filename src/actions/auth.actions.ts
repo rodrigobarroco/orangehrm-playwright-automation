@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+
 import { LoginPage, users } from '@base';
 
 export class AuthActions {

@@ -1,4 +1,5 @@
 import { test as base } from '@playwright/test';
+
 import { AuthActions } from '@base';
 
 export const test = base.extend<{
