@@ -1,4 +1,4 @@
-import { test, expect, LoginPage, users } from '@base';
+import { test, expect, users } from '@base';
 
 /**
  * Scenario Outline: Login outcomes matrix for common combinations
@@ -19,27 +19,45 @@ import { test, expect, LoginPage, users } from '@base';
 
 test.describe('Login Outcomes Matrix', () => {
   const examples = [
-    { username: users.admin.username, password: users.admin.password, outcome: 'Redirects to Dashboard' },
-    { username: users.admin.username, password: users.invalid.password, outcome: 'Shows "Invalid credentials"' },
-    { username: users.invalid.username, password: users.admin.password, outcome: 'Shows "Invalid credentials"' },
-    { username: users.empty.username, password: users.admin.password, outcome: 'Shows "Required" for Username' },
-    { username: users.admin.username, password: users.empty.password, outcome: 'Shows "Required" for Password' },
-    { username: users.empty.username, password: users.empty.password, outcome: 'Shows "Required" for both fields' },
+    {
+      username: users.admin.username,
+      password: users.admin.password,
+      outcome: 'Redirects to Dashboard',
+    },
+    {
+      username: users.admin.username,
+      password: users.invalid.password,
+      outcome: 'Shows "Invalid credentials"',
+    },
+    {
+      username: users.invalid.username,
+      password: users.admin.password,
+      outcome: 'Shows "Invalid credentials"',
+    },
+    {
+      username: users.empty.username,
+      password: users.admin.password,
+      outcome: 'Shows "Required" for Username',
+    },
+    {
+      username: users.admin.username,
+      password: users.empty.password,
+      outcome: 'Shows "Required" for Password',
+    },
+    {
+      username: users.empty.username,
+      password: users.empty.password,
+      outcome: 'Shows "Required" for both fields',
+    },
   ];
 
   for (const { username, password, outcome } of examples) {
-    test(`${outcome} → username="${username}" / password="${password}"`, async ({ page }) => {
-      const loginPage = new LoginPage(page);
-
-      // Step 1: Navigate to login page
+    test(`username="${username}" / password="${password}" → ${outcome}`, async ({ loginPage }) => {
       await loginPage.goto();
-
-      // Step 2: Fill in credentials
       await loginPage.login(username, password);
 
-      // Step 3: Validate outcome based on test data
       if (outcome.includes('Redirects')) {
-        await expect(page).toHaveURL(/dashboard/);
+        await expect.soft(loginPage.page).toHaveURL(/dashboard/);
       } else if (outcome.includes('Invalid')) {
         await loginPage.expectInvalidCredentials();
         await loginPage.assertOnLoginPage();

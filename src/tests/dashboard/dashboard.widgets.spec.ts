@@ -1,4 +1,4 @@
-import { test, AuthActions, DashboardPage } from '@base';
+import { test } from '@base';
 
 /**
  * Scenario: Dashboard renders core widgets, sidebar, and topbar correctly
@@ -20,25 +20,16 @@ import { test, AuthActions, DashboardPage } from '@base';
  */
 
 test.describe('Dashboard layout validation', () => {
-  test('Dashboard renders core widgets, sidebar, and topbar correctly', async ({ page }) => {
-    const auth = new AuthActions(page);
-    const dashboard = new DashboardPage(page);
-
-    // Step 1: Login as Admin user
+  test('should render core widgets, sidebar, and topbar correctly', async ({ auth, dashboard }) => {
     await auth.loginAsAdmin();
-
-    // Step 2: Navigate to Dashboard
     await dashboard.goto();
 
-    // Step 3: Validate sidebar visibility and menu items
     await dashboard.sidebar.expectVisible();
     await dashboard.sidebar.expectMenuItemsVisible();
 
-    // Step 4: Validate topbar visibility and user info section
     await dashboard.topbar.expectVisible();
     await dashboard.topbar.expectUserInfoVisible();
 
-    // Step 5: Validate all core dashboard widgets are visible
     await dashboard.expectWidgetsVisible();
   });
 });

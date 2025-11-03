@@ -17,4 +17,4 @@ export { users } from './config/users';
 
 // Playwright exports
 export { expect } from '@playwright/test';
-export type { Locator, Page } from '@playwright/test';    
+export type { Locator, Page } from '@playwright/test';

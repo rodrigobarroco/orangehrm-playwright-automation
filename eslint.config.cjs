@@ -19,9 +19,11 @@ module.exports = [
       'tsconfig.json',
     ],
   },
+
   ...compat.extends('plugin:import/recommended'),
   js.configs.recommended,
   prettier,
+
   {
     files: ['**/*.ts'],
     languageOptions: {
@@ -32,11 +34,26 @@ module.exports = [
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
       },
+
+      // ✅ Aqui definimos todos os "globals" válidos no ambiente Node
+      globals: {
+        console: 'readonly',
+        module: 'writable',
+        require: 'readonly',
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        exports: 'writable',
+      },
     },
+
     plugins: {
       import: importPlugin,
       '@typescript-eslint': tsPlugin,
     },
+
     settings: {
       'import/resolver': {
         typescript: {
@@ -44,8 +61,11 @@ module.exports = [
         },
       },
     },
+
     rules: {
       ...tsPlugin.configs.recommended.rules,
+
+      // Imports
       'import/order': [
         'error',
         {
@@ -53,9 +73,17 @@ module.exports = [
           'newlines-between': 'always',
         },
       ],
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-
       'import/no-unresolved': 'off',
+
+      // Consoles e variáveis globais
+      'no-console': 'off',
+      'no-undef': 'off',
+
+      // TypeScript e Playwright-friendly adjustments
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
     },
   },
 ];

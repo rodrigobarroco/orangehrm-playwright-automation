@@ -122,24 +122,26 @@ Runs Prettier on all files to keep code style consistent.
 
 ## Project Status
 
-**Current:**  
-- Framework and environment fully configured (Playwright + TypeScript + ESLint v9 + Prettier).  
-- Page Action Model implemented for core modules:  
-  - `LoginPage`, `DashboardPage`, and `TimePage` with stable, role-based selectors.  
-- `AuthActions` added for reusable login and authentication flows.  
-- Comprehensive test coverage completed for:  
-  - Login outcomes matrix (valid, invalid, and required field validations).  
-  - Forgot Password end-to-end reset flow.  
-  - Dashboard layout validation and navigation to Time module.  
-  - Time module Punch In/Out operations and record management (edit/delete).  
-- TypeScript path aliases (`@base`) configured for clean imports.  
-- Linting, formatting, and local execution successfully validated.  
+**Current:**
 
-**Next Steps:**  
-- Implement GitHub Actions CI for automated headless test runs with artifact upload (HTML report, trace, video).  
-- Integrate Allure reporting for enhanced test visualization.  
-- Add tagging strategy for test grouping (e.g., `@smoke`, `@regression`, `@dashboard`).  
-- Final documentation polish with CI setup instructions and report references.  
+- Framework and environment fully configured (Playwright + TypeScript + ESLint v9 + Prettier).
+- Page Action Model implemented for core modules:
+  - `LoginPage`, `DashboardPage`, and `TimePage` with stable, role-based selectors.
+- `AuthActions` added for reusable login and authentication flows.
+- Comprehensive test coverage completed for:
+  - Login outcomes matrix (valid, invalid, and required field validations).
+  - Forgot Password end-to-end reset flow.
+  - Dashboard layout validation and navigation to Time module.
+  - Time module Punch In/Out operations and record management (edit/delete).
+- TypeScript path aliases (`@base`) configured for clean imports.
+- Linting, formatting, and local execution successfully validated.
+
+**Next Steps:**
+
+- Implement GitHub Actions CI for automated headless test runs with artifact upload (HTML report, trace, video).
+- Integrate Allure reporting for enhanced test visualization.
+- Add tagging strategy for test grouping (e.g., `@smoke`, `@regression`, `@dashboard`).
+- Final documentation polish with CI setup instructions and report references.
 
 ## Author
 
