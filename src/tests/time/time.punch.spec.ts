@@ -1,4 +1,4 @@
-import { test, expect, AuthActions, TimePage } from '@base';
+import { test, expect } from '@base';
 
 /**
  * Scenario: User performs Punch In and Punch Out successfully
@@ -9,7 +9,7 @@ import { test, expect, AuthActions, TimePage } from '@base';
  *   | Time | 08:00 AM |
  *   | Note | Test punch in |
  * And I click the "In" button
- * Then I should see a success toast message saying "Successfully Saved" at the bottom left
+ * Then I should see a success toast message saying "Successfully Saved"
  * And the page should reload showing:
  *   | field            | expected value |
  *   | Punched In Time  | 08:00 AM       |
@@ -26,21 +26,14 @@ import { test, expect, AuthActions, TimePage } from '@base';
  *   | Punched Out Note  | Test punch out |
  */
 
-test.describe('Time Tracking - Punch In/Out Workflow', () => {
-  test('User performs Punch In and Punch Out successfully', async ({ page }) => {
-    const auth = new AuthActions(page);
-    const timePage = new TimePage(page);
-
-    // Step 1: Log in as Admin and navigate to Punch In page
-    await auth.loginAsAdmin();
+test.describe('Time Module → Time Punch Creation', () => {
+  test('@punch User performs Punch In and Punch Out successfully', async ({ timePage }) => {
     await timePage.goto();
 
-    // Step 2: Perform Punch In
     await timePage.punchIn('08:00 AM', 'Test punch in');
-    await expect(timePage.successMessage).toBeVisible();
+    await expect(timePage.successSavedMessage).toBeVisible();
 
-    // Step 3: Perform Punch Out
     await timePage.punchOut('05:00 PM', 'Test punch out');
-    await expect(timePage.successMessage).toBeVisible();
+    await expect(timePage.successSavedMessage).toBeVisible();
   });
 });

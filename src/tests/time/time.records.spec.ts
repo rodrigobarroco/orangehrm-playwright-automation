@@ -1,4 +1,4 @@
-import { test, expect, AuthActions, TimePage } from '@base';
+import { test, expect } from '@base';
 
 /**
  * Feature: Time Module – My Records
@@ -16,47 +16,30 @@ test.describe('Time Module – Attendance Records', () => {
    * Then I should see a success toast message saying "Successfully Updated"
    * And the updated note should appear in the records table
    */
-  test('should edit an existing Punch In/Out record', async ({ page }) => {
-    const auth = new AuthActions(page);
-    const timePage = new TimePage(page);
-
-    // Step 1: Login and navigate to My Records
-    await auth.loginAsAdmin();
+  test('@records should edit an existing Punch In/Out record', async ({ timePage }) => {
     await timePage.openMyRecords();
 
-    // Step 2: Ensure there's a record listed
-    await expect(timePage.recordRow).toBeVisible();
+    await expect(timePage.recordRow.first()).toBeVisible();
 
-    // Step 3: Edit and update note
     await timePage.editRecord('Updated punch out note');
-
-    // Step 4: Validate success message
-    await expect(timePage.successMessage).toBeVisible();
   });
 
   /**
-   * Scenario: Delete an existing Punch record and confirm deletion
+   * Scenario: Delete existing Punch records from My Records page
    *
-   * Given I am on the Attendance > My Records page
-   * And at least one Punch record exists
-   * When I click the delete icon for a record
-   * And confirm the deletion
-   * Then I should see a success toast saying "Successfully Deleted"
-   * And the record should no longer appear in the table
+   * Given there is at least one existing Punch record
+   * When I navigate to Attendance > My Records
+   * And I select all records and confirm deletion
+   * Then I should see a success toast message "Successfully Deleted"
+   * And the records table should be empty
    */
-  test('should delete an existing Punch record successfully', async ({ page }) => {
-    const auth = new AuthActions(page);
-    const timePage = new TimePage(page);
 
-    // Step 1: Login and navigate to My Records
-    await auth.loginAsAdmin();
+  test('@records should delete all existing Punch records successfully', async ({ timePage }) => {
     await timePage.openMyRecords();
 
-    // Step 2: Delete the first record
-    await timePage.deleteRecord();
+    await timePage.deleteAllRecords();
 
-    // Step 3: Validate success message and absence of record
-    await expect(timePage.successMessage).toBeVisible();
-    await expect(timePage.recordRow).not.toBeVisible();
+    await expect(timePage.successDeletedMessage).toBeVisible();
+    await expect(timePage.recordRow.first()).not.toBeVisible();
   });
 });

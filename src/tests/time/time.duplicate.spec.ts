@@ -1,4 +1,4 @@
-import { test, expect, AuthActions, TimePage } from '@base';
+import { test, expect } from '@base';
 
 /**
  * Scenario: Prevent Punch In with overlapping or duplicate records
@@ -15,20 +15,16 @@ import { test, expect, AuthActions, TimePage } from '@base';
  * And the record should not be saved again
  */
 
-test.describe('Time Tracking - Duplicate Prevention', () => {
-  test('Prevent duplicate Punch In entries', async ({ page }) => {
-    const auth = new AuthActions(page);
-    const timePage = new TimePage(page);
-
-    // Step 1: Log in as Admin and navigate to Punch In page
-    await auth.loginAsAdmin();
+test.describe('Time Module → Duplicate Prevention', () => {
+  test('@punch should prevent duplicate Punch In entries', async ({ timePage }) => {
     await timePage.goto();
 
-    // Step 2: Attempt to create a duplicate Punch In record
+    await timePage.punchIn('08:00 AM', 'Test punch in');
+    await expect(timePage.successSavedMessage).toBeVisible();
+
     await timePage.punchIn('08:00 AM', 'Test duplicate punch in');
 
-    // Step 3: Validate overlapping record message appears
-    const overlappingMessage = page.getByText('Overlapping Records Found');
+    const overlappingMessage = timePage.page.getByText('Overlapping Records Found');
     await expect(overlappingMessage).toBeVisible();
   });
 });

@@ -1,4 +1,4 @@
-import { test, expect, AuthActions, DashboardPage, TimePage } from '@base';
+import { test, expect } from '@base';
 
 /**
  * Scenario: "Time at Work" clock icon navigates to Attendance > Punch In page
@@ -16,25 +16,21 @@ import { test, expect, AuthActions, DashboardPage, TimePage } from '@base';
  * And the URL should contain "/attendance/punchIn"
  */
 
-test.describe('Dashboard → Time Navigation', () => {
-  test('Time at Work clock icon navigates to Punch In page', async ({ page }) => {
-    const auth = new AuthActions(page);
-    const dashboard = new DashboardPage(page);
-    const timePage = new TimePage(page);
-
-    // Step 1: Log in as Admin
+test.describe('Dashboard → Time navigation', () => {
+  test('should navigate from Time at Work to Punch In page', async ({
+    page,
+    auth,
+    dashboard,
+    timePage,
+  }) => {
     await auth.loginAsAdmin();
-
-    // Step 2: Navigate to Dashboard
     await dashboard.goto();
-
-    // Step 3: Click the "Time at Work" clock icon
     await dashboard.openTimeAtWork();
 
-    // Step 4: Validate navigation to Attendance > Punch In page
     await expect(page).toHaveURL(/attendance\/punchIn/);
-
-    // Step 5: Validate Punch In header is visible
     await expect(timePage.punchInHeader).toBeVisible();
+    await expect(timePage.noteInput).toBeVisible();
+    await expect(timePage.datePickerIcon).toBeVisible();
+    await expect(timePage.punchInButton).toBeVisible();
   });
 });
