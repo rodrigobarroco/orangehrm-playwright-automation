@@ -93,7 +93,7 @@ export class TimePage {
 
     await this.clockIcon.click();
     await this.noteInput.fill(note);
-    await this.punchInButton.click();
+    await Promise.all([this.page.waitForLoadState('networkidle'), this.punchInButton.click()]);
   }
 
   async punchOut(time: string, note: string) {
