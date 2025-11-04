@@ -3,22 +3,25 @@
 Automated end-to-end test suite for the [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com/) using **Playwright + TypeScript**.  
 The suite validates key modules like Login, Dashboard, and Time (Punch In/Out, Records, Duplicate Prevention, etc.) following clean BDD-style documentation.
 
-## ⚡ Quick Start
+## Quick Start
 
 Clone o repositório e rode tudo localmente:
 
-```bash
 # 1. Clone o projeto
+```bash
 git clone https://github.com/rodrigobarroco/orangehrm-playwright-automation.git
 cd orangehrm-playwright-automation
-
+```
 # 2. Instale as dependências
+```bash
 npm ci
-
+```
 # 3. Instale os navegadores do Playwright
+```bash
 npx playwright install --with-deps
-
+```
 # 4. Execute os testes
+```bash
 npm test
 ```
 
