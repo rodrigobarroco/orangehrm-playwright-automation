@@ -8,8 +8,9 @@ export default defineConfig({
   },
   retries: 1,
   reporter: [
-    ['list'], // shows test progress in console
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['list'], 
+    ['allure-playwright'],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }]
   ],
   use: {
     baseURL: 'https://opensource-demo.orangehrmlive.com',
