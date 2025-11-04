@@ -1,152 +1,122 @@
-﻿![Playwright Tests](https://github.com/rodrigobarroco/orangehrm-playwright-automation/actions/workflows/playwright.yml/badge.svg)
+﻿# OrangeHRM Playwright Automation
 
-# OrangeHRM Playwright Automation Framework
+Automated end-to-end test suite for the [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com/) using **Playwright + TypeScript**.  
+The suite validates key modules like Login, Dashboard, and Time (Punch In/Out, Records, Duplicate Prevention, etc.) following clean BDD-style documentation.
 
-This repository contains the initial setup for a modern **UI automation framework** using  
-**Playwright + TypeScript + Page Action Model (PAM)** for the OrangeHRM demo application
+## ⚡ Quick Start
 
-## Project Overview
-
-This framework follows a **modular and scalable design** using Page and Action layers, providing clean separation between:
-
-- Page Objects (UI elements and actions)
-- Business Flows (Auth, Dashboard, Time)
-- Reusable Fixtures and Configurations
-
-## Current Scope (v1)
-
-The first implemented test suite covers the **authentication flow**:
-
-- Added `LoginPage` with robust Playwright locators.
-- Created `AuthActions` for reusable login flows.
-- Implemented **Login Matrix Test** to validate:
-  - Successful login with valid credentials
-  - Invalid credentials error handling
-  - Required field validations (username/password)
-
-### Folder Structure
-
-```
-src/
-├── actions/ # Business logic (e.g., Auth, Time)
-├── config/ # Constants and environment settings
-├── fixtures/ # Shared setup/teardown (future use)
-├── pages/ # Page Objects (Login, Dashboard, etc.)
-├── tests/ # Test suites (feature-based)
-└── utils/ # Helpers, data, and configuration
-```
-
-## Tech Stack
-
-- [Playwright](https://playwright.dev/) (v1.48+)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Allure Reporter](https://docs.qameta.io/allure/)
-- ESLint + Prettier for code quality
-- Node.js 20+
-- GitHub Actions CI (to be added)
-
-## Setup & Run
-
-### Prerequisites
-
-- Node.js 20+
-- Git
-
-### Installation
-
-Clone the repository and run:
+Clone o repositório e rode tudo localmente:
 
 ```bash
-npm run setup
+# 1. Clone o projeto
+git clone https://github.com/rodrigobarroco/orangehrm-playwright-automation.git
+cd orangehrm-playwright-automation
+
+# 2. Instale as dependências
+npm ci
+
+# 3. Instale os navegadores do Playwright
+npx playwright install --with-deps
+
+# 4. Execute os testes
+npm test
 ```
 
-This command installs all dependencies and downloads Playwright browsers.
+## Continuous Integration
 
-### Running Tests
+| Workflow | Status |
+|-----------|--------|
+| Playwright Tests | ![Playwright Tests](https://github.com/rodrigobarroco/orangehrm-playwright-automation/actions/workflows/playwright.yml/badge.svg) |
 
-Headed mode:
+**Latest Allure Report:**  
+[View Report on GitHub Pages](https://rodrigobarroco.github.io/orangehrm-playwright-automation/)  
+*(updated automatically after each successful CI run)*
+
+
+## Stack
+
+- **Playwright** (browser automation)
+- **TypeScript** (strict typing)
+- **Allure Report** (visual test reports)
+- **GitHub Actions** (CI/CD pipeline)
+- **Page Object Model** (structured test design)
+
+
+## Scripts
 
 ```bash
+# Run tests locally
 npm run test
-```
 
-Headless mode:
+# Generate and open Allure report locally
+npm run report:allure
 
-```bash
-npx playwright test --headless
-```
-
-Debug mode (opens Playwright inspector):
-
-```bash
-npx playwright test --debug
-```
-
-Show report:
-
-```bash
-npx playwright show-report
-```
-
-## Code Quality and Formatting
-
-The project uses ESLint v9 (Flat Config) and Prettier to enforce consistent code style.
-
-### Run static analysis
-
-```bash
-npm run lint
-```
-
-Runs ESLint against all `.ts` files in the `src/` directory.
-
-> If no TypeScript files exist yet, ESLint will report
->
-> `No files matching the pattern "src" were found.`
->
-> This is expected until code is added.
-
-### Auto-fix issues
-
-```
+# Lint and fix
 npm run lint:fix
-```
 
-Applies automatic fixes for minor problems.
-
-### Format code
-
-```
+# Format code
 npm run format
 ```
 
-Runs Prettier on all files to keep code style consistent.
+## Project Structure
 
-## Project Status
+```bash
+src/
+├── fixtures/           # Shared test setup and teardown
+├── pages/              # Page Object Models
+├── tests/
+│   ├── login/          # Login feature tests
+│   ├── dashboard/      # Dashboard validations
+│   └── time/           # Time Module (Punch In/Out, Records)
+└── utils/              # Helpers and custom assertions
+```
+## Requirements
 
-**Current:**
+- Node.js 20+
 
-- Framework and environment fully configured (Playwright + TypeScript + ESLint v9 + Prettier).
-- Page Action Model implemented for core modules:
-  - `LoginPage`, `DashboardPage`, and `TimePage` with stable, role-based selectors.
-- `AuthActions` added for reusable login and authentication flows.
-- Comprehensive test coverage completed for:
-  - Login outcomes matrix (valid, invalid, and required field validations).
-  - Forgot Password end-to-end reset flow.
-  - Dashboard layout validation and navigation to Time module.
-  - Time module Punch In/Out operations and record management (edit/delete).
-- TypeScript path aliases (`@base`) configured for clean imports.
-- Linting, formatting, and local execution successfully validated.
+Verify your version:
+```bash
+node -v
+```
 
-**Next Steps:**
+- npm 10+ (included with Node)
 
-- Implement GitHub Actions CI for automated headless test runs with artifact upload (HTML report, trace, video).
-- Integrate Allure reporting for enhanced test visualization.
-- Add tagging strategy for test grouping (e.g., `@smoke`, `@regression`, `@dashboard`).
-- Final documentation polish with CI setup instructions and report references.
+- Playwright Browsers
+```bash
+npx playwright install --with-deps
+```
 
-## Author
+- Allure Commandline
+Installed automatically as a dev dependency (`allure-commandline`).
 
-**Rodrigo Barroco**
-Quality Automation Engineer
-Project: OrangeHRM QA Automation Challenge
+## Conventions
+
+- Tags like `@punch` or `@records` group tests by feature.
+
+- Each test follows a readable BDD-style block:
+
+```bash
+/**
+ * Scenario: Edit existing Punch In/Out record successfully
+ *
+ * Given I am on the Attendance > My Records page
+ * When I click the edit icon for a record
+ * And update the Punch Out Note field
+ * Then I should see a success toast message "Successfully Updated"
+ */
+```
+
+## CI Flow Summary
+
+1. Install dependencies and Playwright browsers
+
+2. Run tests headless on Ubuntu
+
+3. Upload playwright-report, test-results, and allure-results artifacts
+
+4. Generate Allure report
+
+5. Deploy to GitHub Pages
+
+### Author
+**Rodrigo Barroco** Quality Automation Engineer Project: OrangeHRM QA Automation Challenge
