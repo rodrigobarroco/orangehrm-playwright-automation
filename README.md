@@ -1,4 +1,6 @@
-﻿# OrangeHRM Playwright Automation Framework
+﻿![Playwright Tests](https://github.com/rodrigobarroco/orangehrm-playwright-automation/actions/workflows/playwright.yml/badge.svg)
+
+# OrangeHRM Playwright Automation Framework
 
 This repository contains the initial setup for a modern **UI automation framework** using  
 **Playwright + TypeScript + Page Action Model (PAM)** for the OrangeHRM demo application
