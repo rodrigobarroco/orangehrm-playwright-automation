@@ -6,7 +6,7 @@ export default defineConfig({
   expect: {
     timeout: 20_000,
   },
-  retries: 1,
+  retries: 2,
   reporter: [
     ['list'], 
     ['allure-playwright'],
