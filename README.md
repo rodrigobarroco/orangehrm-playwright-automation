@@ -29,7 +29,7 @@ npm test
 
 | Workflow | Status |
 |-----------|--------|
-| Playwright Tests | ![Playwright Tests](https://github.com/rodrigobarroco/orangehrm-playwright-automation/actions/workflows/playwright.yml/badge.svg) |
+| Playwright Tests | [![Playwright Tests](https://github.com/rodrigobarroco/orangehrm-playwright-automation/actions/workflows/playwright.yaml/badge.svg)](https://github.com/rodrigobarroco/orangehrm-playwright-automation/actions/workflows/playwright.yaml) |
 
 **Latest Allure Report:**  
 [View Report on GitHub Pages](https://rodrigobarroco.github.io/orangehrm-playwright-automation/)  
