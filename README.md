@@ -5,22 +5,22 @@ The suite validates key modules like Login, Dashboard, and Time (Punch In/Out, R
 
 ## Quick Start
 
-Clone o repositório e rode tudo localmente:
+Clone the repository and run everything locally:
 
-# 1. Clone o projeto
+# 1. Clone the project
 ```bash
 git clone https://github.com/rodrigobarroco/orangehrm-playwright-automation.git
 cd orangehrm-playwright-automation
 ```
-# 2. Instale as dependências
+# 2. Install Dependencies
 ```bash
 npm ci
 ```
-# 3. Instale os navegadores do Playwright
+# 3. Install Playwright browsers
 ```bash
 npx playwright install --with-deps
 ```
-# 4. Execute os testes
+# 4. Run the tests
 ```bash
 npm test
 ```
